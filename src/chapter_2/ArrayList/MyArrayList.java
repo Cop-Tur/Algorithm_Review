@@ -36,4 +36,12 @@ public class MyArrayList <AnyType> implements Iterable<AnyType> {
         return theIems[idx];
     }
 
+    public AnyType set(int idx,AnyType newVal){
+        if (idx<0 || idx>=size())
+            throw new ArrayIndexOutOfBoundsException();
+        AnyType old = theIems[idx];
+        theIems[idx]=newVal;
+        return old;
+    }
+
 }
