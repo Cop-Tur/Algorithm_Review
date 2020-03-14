@@ -77,5 +77,6 @@ public class MyArrayList <AnyType> implements Iterable<AnyType> {
 
     private class ArrayListIterator implements java.util.Iterator<AnyType> {
 
+
     }
 }
