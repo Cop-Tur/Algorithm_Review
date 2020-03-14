@@ -59,10 +59,23 @@ public class MyArrayList <AnyType> implements Iterable<AnyType> {
     public void add(int idx,AnyType x){
         if (theItems.length==size())
             ensureCapacity(size()*2+1);
-        for (int i=theSize;i>idx;i--)
-            theItems[i]=theItems[i-1];
+        if (theSize - idx >= 0) System.arraycopy(theItems, idx, theItems, idx + 1, theSize - idx);
         theItems[idx]=x;
         theSize++;
     }
 
+    public AnyType remove(int idx){
+        AnyType removedItem = theItems[idx];
+        if (size() - 1 - idx >= 0) System.arraycopy(theItems, idx + 1, theItems, idx, size() - 1 - idx);
+        theSize--;
+        return removedItem;
+    }
+
+    public java.util.Iterator<AnyType> iterator(){
+        return new ArrayListIterator();
+    }
+
+    private class ArrayListIterator implements java.util.Iterator<AnyType> {
+
+    }
 }
