@@ -78,6 +78,7 @@ public class MyArrayList<AnyType> implements Iterable<AnyType> {
         return new ArrayListIterator();
     }
 
+    //这里定义一个内部类，如果加static是嵌套类，此时要加参数列表，使调用时传对象，否则没有意义。
     private class ArrayListIterator implements java.util.Iterator<AnyType> {
         private int current = 0;
 
