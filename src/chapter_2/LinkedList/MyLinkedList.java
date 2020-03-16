@@ -46,5 +46,16 @@ public class MyLinkedList<AnyType> {
     public void add(int idx,AnyType x){
         addBefore(getNode(idx,0,size()),x);
     }
-
+    public AnyType get(int idx){
+        return getNode(idx).data;
+    }
+    public AnyType set(int idx,AnyType newVal){
+        Node<AnyType> p=getNode(idx);
+        AnyType oldVal = p.data;
+        p.data = newVal;
+        return oldVal;
+    }
+    public AnyType remove(int idx){
+        return remove(getNode(idx));
+    }
 }
