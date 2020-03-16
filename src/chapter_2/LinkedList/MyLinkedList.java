@@ -32,5 +32,19 @@ public class MyLinkedList<AnyType> {
         theSize=0;
         modCount++;
     }
+    public int size(){
+        return theSize;
+    }
+    public boolean isEmpty(){
+        return size() == 0;
+    }
+
+    public boolean add(AnyType x){
+        add(size(),x);
+        return true;
+    }
+    public void add(int idx,AnyType x){
+        addBefore(getNode(idx,0,size()),x);
+    }
 
 }
