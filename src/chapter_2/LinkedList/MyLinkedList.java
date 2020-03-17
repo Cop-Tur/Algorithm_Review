@@ -58,4 +58,12 @@ public class MyLinkedList<AnyType> {
     public AnyType remove(int idx){
         return remove(getNode(idx));
     }
+
+    private void addBefore(Node<AnyType> p,AnyType x){
+        Node<AnyType> newNode = new Node<>(x,p.prev,p);
+        newNode.prev.next=newNode;
+        p.prev=newNode;
+        theSize++;
+        modCount++;
+    }
 }
