@@ -1,5 +1,7 @@
 package chapter_2.LinkedList;
 
+import java.io.PrintWriter;
+
 public class MyLinkedList<AnyType> {
     private int theSize;
     private int modCount=0;
@@ -65,5 +67,59 @@ public class MyLinkedList<AnyType> {
         p.prev=newNode;
         theSize++;
         modCount++;
+    }
+
+    private AnyType remove(Node<AnyType> p){
+        p.prev.next=p.next;
+        p.next.prev=p.prev;
+        theSize--;
+        modCount++;
+        return p.data;
+    }
+
+    private Node<AnyType> getNode(int idx){
+        return getNode(idx,0,size()-1);
+    }
+
+    private Node<AnyType> getNode(int idx,int lower,int upper){
+        Node<AnyType> p;
+        if (idx<lower||idx>upper){
+            throw new IndexOutOfBoundsException();
+        }
+        if (idx<size()/2){
+            p=beginMarker.next;
+            for (int i=0;i<idx;i++)
+                p=p.next;
+        }else {
+            p=endMarker;
+            for (int i=size()-1;i>idx;i--)
+                p=p.prev;
+        }
+        return p;
+    }
+
+    public java.util.Iterator<AnyType> iterator(){
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements java.util.Iterator<AnyType>{
+        private Node<AnyType> current = beginMarker.next;
+        private int expectedModCount = modCount;
+        private boolean okToRemove = false;
+
+        public boolean hasNext(){
+            return current !=endMarker;
+        }
+        public AnyType next(){
+            if (modCount!=expectedModCount)
+                throw new java.util.ConcurrentModificationException();
+            if (!hasNext())
+                throw new java.util.NoSuchElementException();
+
+            AnyType nextItem = current.data;
+            current = current.next;
+            okToRemove = true;
+
+        }
     }
 }
