@@ -119,7 +119,16 @@ public class MyLinkedList<AnyType> {
             AnyType nextItem = current.data;
             current = current.next;
             okToRemove = true;
-
+            return nextItem;
+        }
+        public void remove(){
+            if (modCount!=expectedModCount)
+                throw new java.util.ConcurrentModificationException();
+            if (!okToRemove)
+                throw new IllegalStateException();
+            MyLinkedList.this.remove(current.prev);
+            expectedModCount++;
+            okToRemove=false;
         }
     }
 }
