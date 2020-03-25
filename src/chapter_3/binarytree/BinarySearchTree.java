@@ -23,4 +23,17 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
     public void makeEmpty(){
         root=null;
     }
+
+
+    public boolean contains(AnyType x,BinaryNode<AnyType> t){
+        if (t==null)
+            return false;
+        int compareResult = x.compareTo(t.element);
+        if (compareResult<0)
+            return contains(x,t.left);
+        else if (compareResult>0)
+            return contains(x,t.right);
+        else
+            return true;
+    }
 }
