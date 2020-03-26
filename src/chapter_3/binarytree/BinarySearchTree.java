@@ -1,5 +1,7 @@
 package chapter_3.binarytree;
 
+import org.omg.CORBA.Any;
+
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
     private static class BinaryNode<AnyType>{
         BinaryNode(AnyType theElement){
@@ -23,9 +25,16 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
     public void makeEmpty(){
         root=null;
     }
+    public boolean isEmpty(){
+        return root == null;
+    }
+
+    public boolean contains(AnyType x){
+        return contains(x,root);
+    }
 
 
-    public boolean contains(AnyType x,BinaryNode<AnyType> t){
+    private boolean contains(AnyType x, BinaryNode<AnyType> t){
         if (t==null)
             return false;
         int compareResult = x.compareTo(t.element);
@@ -36,4 +45,18 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
         else
             return true;
     }
+    private BinaryNode<AnyType> findMin(BinaryNode<AnyType> t){
+        if (t == null)
+            return null;
+        else if (t.left == null)
+            return t;
+        return findMin(t.left);
+    }
+    private BinaryNode<AnyType> findMax(BinaryNode<AnyType> t){
+        if (t != null)
+            while (t.right!=null)
+                t=t.right;
+        return t;
+    }
+
 }
