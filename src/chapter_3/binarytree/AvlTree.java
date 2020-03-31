@@ -37,4 +37,8 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
             t.left=insert(x,t.left);
         return balance(t);
     }
+
+    private AvlNode<AnyType> balance(AvlNode<AnyType> t){
+
+    }
 }
