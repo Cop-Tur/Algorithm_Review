@@ -38,7 +38,23 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
         return balance(t);
     }
 
-    private AvlNode<AnyType> balance(AvlNode<AnyType> t){
+    private static final int ALLOWED_IMBALANCE = 1;
 
+    private AvlNode<AnyType> balance(AvlNode<AnyType> t){
+        if (t == null)
+            return t;
+        if (height(t.left)-height(t.right) > ALLOWED_IMBALANCE)
+            if (height(t.left.left)>=height(t.left.right))
+                t=rotateWithLeftChild(t);
+            else
+                t=doubleWithLeftChild(t);
+        else
+            if (height(t.right)-height(t.left)>ALLOWED_IMBALANCE)
+                if (height(t.right.right)>=height(t.right.left))
+                    t=rotateWithRightChild(t);
+                else
+                    t=doubleWithRightChild(t);
+        t.height=Math.max(height(t.left),height(t.right))+1;
+        return t;
     }
 }
