@@ -11,7 +11,15 @@ public class SeparateChainingHashTable<AnyType> {
     }
 
     public SeparateChainingHashTable(int size){
-        theLists = new LinkedList[nextPrime(size)]
+        theLists = new LinkedList[nextPrime(size)];
+        for (int i=0;i<theLists.length;i++)
+            theLists[i]=new LinkedList<>();
+    }
+
+    public void makeEmpty(){
+        for (int i=0; i<theLists.length;i++)
+            theLists[i].clear();
+        currentSize = 0;
     }
 
     private static final int DEFAULT_TABLE_SIZE = 101;
