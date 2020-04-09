@@ -32,6 +32,14 @@ public class SeparateChainingHashTable<AnyType> {
         }
     }
 
+    public void remove(AnyType x){
+        List<AnyType> whichList = theLists[myhash(x)];
+        if (whichList.contains(x)){
+            whichList.remove(x);
+            currentSize++;
+        }
+    }
+
     private static final int DEFAULT_TABLE_SIZE = 101;
 
     private List<AnyType>[] theLists;
