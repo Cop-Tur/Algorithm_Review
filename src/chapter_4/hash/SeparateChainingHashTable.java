@@ -40,6 +40,11 @@ public class SeparateChainingHashTable<AnyType> {
         }
     }
 
+    public boolean contains(AnyType x){
+        List<AnyType> whichList = theLists[myhash(x)];
+        return whichList.contains(x);
+    }
+
     private static final int DEFAULT_TABLE_SIZE = 101;
 
     private List<AnyType>[] theLists;
@@ -51,5 +56,19 @@ public class SeparateChainingHashTable<AnyType> {
         if (hashVal < 0)
             hashVal += theLists.length;
         return hashVal;
+    }
+
+    private void rehash(){
+        List<AnyType> [] oldArray = theLists;
+
+        theLists = new List[nextPrime(2*theLists.length)];
+        for (int j=0;j<theLists.length;j++)
+            theLists[j] = new LinkedList<>();
+
+        currentSize=0;
+        for (int i=0;i<oldLists.length;i++)
+            for (AnyType item : oldLists[i])
+                insert(item);
+
     }
 }
