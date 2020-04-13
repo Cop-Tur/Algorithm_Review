@@ -1,7 +1,5 @@
 package chapter_4.hash;
 
-import com.sun.xml.internal.bind.AnyTypeAdapter;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,6 +67,16 @@ public class SeparateChainingHashTable<AnyType> {
         for (int i = 0; i < oldLists.length; i++)
             for (AnyType item : oldLists[i])
                 insert(item);
-
     }
+
+    private static int nextPrime(int n){
+        if (n % 2 == 0){
+            n++;
+        }
+        for (;!isPrime(n);n+=2){
+
+        }
+        return n;
+    }
+
 }
