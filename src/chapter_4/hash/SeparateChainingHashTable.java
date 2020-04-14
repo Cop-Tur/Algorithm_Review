@@ -57,7 +57,7 @@ public class SeparateChainingHashTable<AnyType> {
     }
 
     private void rehash() {
-        List<AnyType>[] oldArray = theLists;
+        List<AnyType>[] oldLists = theLists;
 
         theLists = new List[nextPrime(2 * theLists.length)];
         for (int j = 0; j < theLists.length; j++)
@@ -69,14 +69,28 @@ public class SeparateChainingHashTable<AnyType> {
                 insert(item);
     }
 
-    private static int nextPrime(int n){
-        if (n % 2 == 0){
-            n++;
-        }
-        for (;!isPrime(n);n+=2){
+    private static int nextPrime(int n) {
 
+        boolean state = isPrime(n);
+        while (!state) {
+            state = isPrime(++n);
         }
         return n;
+    }
+
+    private static boolean isPrime(int n) {
+        if (n == 2 || n == 3) {
+            return true;
+        }
+        if (n % 6 != 1 && n % 6 != 5) {
+            return false;
+        }
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
