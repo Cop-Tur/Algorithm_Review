@@ -10,7 +10,7 @@ public class QuickSort {
         quicksort(a, 0, a.length - 1);
     }
 
-    private static <AnyType extends Comparable<? super AnyType>>
+    public static <AnyType extends Comparable<? super AnyType>>
     AnyType median3(AnyType[] a, int left, int right) {
         int center = (left + right) / 2;
         if (a[center].compareTo(a[left]) < 0)
