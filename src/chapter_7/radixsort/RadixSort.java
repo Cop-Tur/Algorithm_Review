@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class RadixSort {
     public static void radixSortA(String[] arr, int stringLen) {
+        //用一个ArrayList做桶
         final int BUCKETS = 256;
         ArrayList<String>[] buckets = new ArrayList[BUCKETS];
 
